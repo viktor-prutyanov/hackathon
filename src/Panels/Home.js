@@ -13,6 +13,12 @@ const Home = (props) => (
 			<Map geodata={props.geodata}/>
 		</Div>
 
+		<Group>
+			<ListItem>
+				<Button size='l' stretched onClick={props.payFunc} >Pay</Button>
+			</ListItem>
+		</Group>
+
 		{
 			props.user &&
 			<Group title="User Info">
@@ -48,6 +54,7 @@ Home.propTypes = {
 		lng: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	}),
 	go: PropTypes.func.isRequired,
+	payFunc: PropTypes.func.isRequired,
 };
 
 export default Home;

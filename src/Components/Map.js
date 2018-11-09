@@ -10,8 +10,8 @@ const mapStyles = {
 };
 
 const defaultPlace = {
-	lat: 59.93567648187513,
-	lng: 30.32374651609689,
+	lat: 19.93567648187513,
+	lng: 20.32374651609689,
 }
 
 export class MapContainer extends React.Component {
@@ -124,5 +124,5 @@ MapContainer.propTypes = {
 };
 
 export default GoogleApiWrapper({
-	apiKey: 'YOUR_GOOGLE_API_KEY'
+	apiKey: 'AIzaSyCkRQRctgbtGaGx0QRrXvxiijAd_1HLJ7U'
 })(MapContainer);

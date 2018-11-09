@@ -81,6 +81,10 @@ class App extends React.Component {
 		}
 	}
 
+	payFunc = (e) => {
+		console.log("Test payment!");
+	};
+
 	go = (e) => {
 		const route = e.currentTarget.dataset.to;
 		this.setState({ activePanel: route })
@@ -90,7 +94,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<View activePanel={this.state.activePanel}>
-				<Home id="home" user={this.state.fetchedUser} geodata={this.state.geodata}  go={this.go} />
+				<Home id="home" user={this.state.fetchedUser} geodata={this.state.geodata} go={this.go} payFunc={this.payFunc}/>
 				<Friends id="friends" data={this.state.data} friends={this.state.friends} getToken={this.getToken} token={this.state.token} go={this.go} />
 			</View>
 		);

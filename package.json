@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "",
 	"main": "index.js",
-	"homepage": "https://kuhel.github.io/VK-Hackathon-2018-demo-app",
+	"homepage": "https://viktor-prutyanov.github.io/hackathon",
 	"scripts": {
 		"start": "cross-env PORT=10888 react-scripts start",
 		"build": "react-scripts build",
