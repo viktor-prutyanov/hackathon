@@ -28,7 +28,7 @@ export class MapContainer extends React.Component {
 			selectedPlace: props,
 			showingInfoWindow: true
 		});
-        this.props.setSelectedPlace(marker.name);
+        this.props.setSelectedPlace(Number(marker.title));
 	}
 	
 	onInfoWindowClose = () =>
@@ -65,10 +65,11 @@ export class MapContainer extends React.Component {
 
 	renderPlace = (place) =>
 		<Marker
-			key={place.user_id}
-			name={place.user_id}
+			title={String(place.user_id)}
+			name={place.name}
 			onClick={this.onMarkerClick}
 			position={{ lat: place.lat, lng: place.lng }}
+			icon={{url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"}}
 		/>
 
 	render() {
@@ -83,10 +84,7 @@ export class MapContainer extends React.Component {
 			>
 
 				<Marker
-					name='You are here'
-					onClick={this.onMarkerClick}
 					position={{ ...position }}
-					icon={this.props.photo_100}
 				/>
 				{this.state.places && this.state.places.map(place => this.renderPlace(place))}
 
@@ -113,7 +111,6 @@ MapContainer.propTypes = {
 		lat: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		lng: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	}),
-	photo100: PropTypes.string,
     setSelectedPlace: PropTypes.func.isRequired,
 };
 

@@ -12,6 +12,7 @@ class App extends React.Component {
 			fetchedUser: null,
 			geodata: null,
             selectedId: null,
+			payment: null,
 		};
 	}
 
@@ -40,12 +41,25 @@ class App extends React.Component {
 	}
 
 	payFunc = (e) => {
-		console.log("Test payment!");
-        connect.send("VKWebAppOpenPayForm", {"app_id": 6746789, "action": "pay-to-user", "params": {"amount": 1,
-            "description": "donat",
-            "action": "pay-to-user",
-            "user_id": this.selectedId}});
+		var money = Number(this.payment)
+		if (isNaN(money))
+		{
+			alert("Invalid payment");
+		}
+		else
+		{
+			console.log(money)
+			console.log("Test payment!");
+			connect.send("VKWebAppOpenPayForm", {"app_id": 6746789, "action": "pay-to-user", "params": {"amount": money,
+				"description": "donat",
+				"action": "pay-to-user",
+				"user_id": this.selectedId}});
+		}
 	};
+
+	payVal = (e) => {
+		this.payment = e.target.value
+	}
 
     setSelectedPlace = (selectedId) => {
         this.selectedId = selectedId;
@@ -55,7 +69,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<View activePanel='home'>
-				<Home id="home" user={this.state.fetchedUser} geodata={this.state.geodata} payFunc={this.payFunc} setSelectedPlace={this.setSelectedPlace} />
+				<Home id="home" geodata={this.state.geodata} payFunc={this.payFunc} payVal={this.payVal} setSelectedPlace={this.setSelectedPlace} />
 			</View>
 		);
 	}
