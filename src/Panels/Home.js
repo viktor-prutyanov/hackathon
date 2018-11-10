@@ -9,7 +9,8 @@ const Home = (props) => (
 		<PanelHeader>Artists Nearby</PanelHeader>
 
 		<Div className='map'>
-			<Map geodata={props.geodata} setSelectedPlace={props.setSelectedPlace}/>
+            <h2>{ props.user }</h2>
+			<Map geodata={props.geodata} photo100="" setSelectedPlace={props.setSelectedPlace}/>
 		</Div>
 
 		<Group>
@@ -22,19 +23,15 @@ const Home = (props) => (
 
 Home.propTypes = {
 	id: PropTypes.string.isRequired,
-	user: PropTypes.shape({
-		photo_200: PropTypes.string,
-		first_name: PropTypes.string,
-		last_name: PropTypes.string,
-		city: PropTypes.shape({
-			title: PropTypes.string,
-		}),
-	}),
 	geodata: PropTypes.shape({
 		lat: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		lng: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	}),
-	go: PropTypes.func.isRequired,
+    user: PropTypes.shape({
+		photo_200: PropTypes.string,
+		first_name: PropTypes.string,
+		last_name: PropTypes.string,
+	}),
 	payFunc: PropTypes.func.isRequired,
     setSelectedPlace: PropTypes.func.isRequired,
 };

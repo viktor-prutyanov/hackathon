@@ -36,7 +36,22 @@ export class MapContainer extends React.Component {
 			activeMarker: null,
 			showingInfoWindow: false
 		});
-	
+
+	update = () => {
+		var xhr = new XMLHttpRequest();
+		var url = "http://172.20.36.209/load";
+		xhr.open("GET", url, true);
+		xhr.onreadystatechange = this.f1;
+		xhr.onreadystatechange = () => {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				console.log(JSON.parse(xhr.responseText)[0]);
+				console.log(this)
+				this.setState({ places: JSON.parse(xhr.responseText)});
+			}
+		};
+		xhr.send();
+	}
+
 	onMapClicked = () => {
 		if (this.state.showingInfoWindow) {
 			this.setState({
@@ -46,16 +61,12 @@ export class MapContainer extends React.Component {
 		}
 	};
 
-	onMapReady = (mapProps, map) => this.searchNearby(map, map.center);
-
-	searchNearby = (map, center) => {
-        this.setState({ places: [{name: "Name1", id: "47895486", lat: 59.856644, lng: 30.457809}, {name: "Name2", id: "192423556", lat: 59.896644, lng: 30.407809}] });
-	};
+	onMapReady = () => this.update();
 
 	renderPlace = (place) =>
 		<Marker
-			key={place.name}
-			name={place.id}
+			key={place.user_id}
+			name={place.user_id}
 			onClick={this.onMarkerClick}
 			position={{ lat: place.lat, lng: place.lng }}
 		/>
@@ -65,8 +76,8 @@ export class MapContainer extends React.Component {
 		return (
 			<Map
 				google={this.props.google}
-				onReady={this.onMapReady}
 				zoom={14}
+				onReady={this.onMapReady}
 				style={mapStyles}
 				initialCenter={position}
 			>
@@ -75,7 +86,7 @@ export class MapContainer extends React.Component {
 					name='You are here'
 					onClick={this.onMarkerClick}
 					position={{ ...position }}
-					icon='https://sun9-3.userapi.com/c816721/v816721296/3a/GnslKfyIKX0.png'
+					icon={this.props.photo_100}
 				/>
 				{this.state.places && this.state.places.map(place => this.renderPlace(place))}
 
@@ -102,6 +113,7 @@ MapContainer.propTypes = {
 		lat: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		lng: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	}),
+	photo100: PropTypes.string,
     setSelectedPlace: PropTypes.func.isRequired,
 };
 
