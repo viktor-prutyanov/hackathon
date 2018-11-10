@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react';
-import Icon24Favorite from '@vkontakte/icons/dist/24/favorite';
+//import Icon24Favorite from '@vkontakte/icons/dist/24/favorite';
 import './Map.css';
 
 const mapStyles = {
@@ -10,8 +10,8 @@ const mapStyles = {
 };
 
 const defaultPlace = {
-	lat: 19.93567648187513,
-	lng: 20.32374651609689,
+	lat: 59.8978149,
+	lng: 30.4054358
 }
 
 export class MapContainer extends React.Component {
@@ -48,34 +48,15 @@ export class MapContainer extends React.Component {
 	onMapReady = (mapProps, map) => this.searchNearby(map, map.center);
 
 	searchNearby = (map, center) => {
-		const { google } = this.props;
-
-		const service = new google.maps.places.PlacesService(map);
-
-		const request = {
-			location: {
-				lat: center.lat(), 
-				lng: center.lng()
-			},
-			radius: 1500,
-			type: ['museum']
-		};
-
-		service.nearbySearch(request, (results, status) => {
-			if (status === google.maps.places.PlacesServiceStatus.OK) {
-				this.setState({ places: results });
-			}
-		});
+        this.setState({ places: [{name: "1", lat: 59.856644, lng: 30.457809}, {name: "2", lat: 59.896644, lng: 30.407809}] });
 	};
 
-	renderPlace = (place) => 
+	renderPlace = (place) =>
 		<Marker
 			key={place.name}
 			name={place.name}
 			onClick={this.onMarkerClick}
-			position={{ lat: place.geometry.location.lat(), lng: place.geometry.location.lng() }}
-			rating={place.rating}
-			pic={place.icon}
+			position={{ lat: place.lat, lng: place.lng }}
 		/>
 
 	render() {
@@ -107,7 +88,6 @@ export class MapContainer extends React.Component {
 						</div>
 						<div className='InfoWindow__text'>
 							<h3>{this.state.selectedPlace.name}</h3>
-							{this.state.selectedPlace.rating && <span className='InfoWindow__rating'><Icon24Favorite /> {this.state.selectedPlace.rating}</span>}
 						</div>
 					</div>
 				</InfoWindow>

@@ -83,6 +83,10 @@ class App extends React.Component {
 
 	payFunc = (e) => {
 		console.log("Test payment!");
+        connect.send("VKWebAppOpenPayForm", {"app_id": 6746789, "action": "pay-to-user", "params": {"amount": 1,
+            "description": "donat",
+            "action": "pay-to-user",
+            "user_id": "47895486"}});
 	};
 
 	go = (e) => {
