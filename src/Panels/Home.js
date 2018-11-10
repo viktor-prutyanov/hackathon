@@ -10,7 +10,7 @@ const Home = (props) => (
 
 		<Div className='map'>
 			<h2>Map of museums near your location</h2>
-			<Map geodata={props.geodata}/>
+			<Map geodata={props.geodata} setSelectedPlace={props.setSelectedPlace}/>
 		</Div>
 
 		<Group>
@@ -55,6 +55,7 @@ Home.propTypes = {
 	}),
 	go: PropTypes.func.isRequired,
 	payFunc: PropTypes.func.isRequired,
+    setSelectedPlace: PropTypes.func.isRequired,
 };
 
 export default Home;

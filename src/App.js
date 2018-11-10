@@ -16,6 +16,7 @@ class App extends React.Component {
 			activePanel: ~ROUTES.indexOf(location) ? location : 'home',
 			fetchedUser: null,
 			geodata: null,
+            selectedId: null,
 		};
 	}
 
@@ -86,7 +87,7 @@ class App extends React.Component {
         connect.send("VKWebAppOpenPayForm", {"app_id": 6746789, "action": "pay-to-user", "params": {"amount": 1,
             "description": "donat",
             "action": "pay-to-user",
-            "user_id": "47895486"}});
+            "user_id": this.selectedId}});
 	};
 
 	go = (e) => {
@@ -95,10 +96,15 @@ class App extends React.Component {
 		this.setLocation(route)
 	};
 
+    setSelectedPlace = (selectedId) => {
+        this.selectedId = selectedId;
+        console.log(this.selectedId);
+    }
+
 	render() {
 		return (
 			<View activePanel={this.state.activePanel}>
-				<Home id="home" user={this.state.fetchedUser} geodata={this.state.geodata} go={this.go} payFunc={this.payFunc}/>
+				<Home id="home" user={this.state.fetchedUser} geodata={this.state.geodata} go={this.go} payFunc={this.payFunc} setSelectedPlace={this.setSelectedPlace} />
 				<Friends id="friends" data={this.state.data} friends={this.state.friends} getToken={this.getToken} token={this.state.token} go={this.go} />
 			</View>
 		);

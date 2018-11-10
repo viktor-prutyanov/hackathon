@@ -19,7 +19,7 @@ export class MapContainer extends React.Component {
 		activeMarker: {},
 		selectedPlace: {},
 		showingInfoWindow: false,
-		places: []
+		places: [],
 	};
 	
 	onMarkerClick = (props, marker) => {
@@ -28,6 +28,7 @@ export class MapContainer extends React.Component {
 			selectedPlace: props,
 			showingInfoWindow: true
 		});
+        this.props.setSelectedPlace(marker.name);
 	}
 	
 	onInfoWindowClose = () =>
@@ -48,13 +49,13 @@ export class MapContainer extends React.Component {
 	onMapReady = (mapProps, map) => this.searchNearby(map, map.center);
 
 	searchNearby = (map, center) => {
-        this.setState({ places: [{name: "1", lat: 59.856644, lng: 30.457809}, {name: "2", lat: 59.896644, lng: 30.407809}] });
+        this.setState({ places: [{name: "Name1", id: "47895486", lat: 59.856644, lng: 30.457809}, {name: "Name2", id: "192423556", lat: 59.896644, lng: 30.407809}] });
 	};
 
 	renderPlace = (place) =>
 		<Marker
 			key={place.name}
-			name={place.name}
+			name={place.id}
 			onClick={this.onMarkerClick}
 			position={{ lat: place.lat, lng: place.lng }}
 		/>
@@ -101,6 +102,7 @@ MapContainer.propTypes = {
 		lat: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		lng: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	}),
+    setSelectedPlace: PropTypes.func.isRequired,
 };
 
 export default GoogleApiWrapper({
