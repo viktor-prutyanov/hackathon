@@ -2,7 +2,6 @@ import React from 'react';
 import connect from '@vkontakte/vkui-connect';
 import { View } from '@vkontakte/vkui';
 import Home from './Panels/Home';
-import Friends from './Panels/Friends';
 import { ROUTES } from './config';
 import '@vkontakte/vkui/dist/vkui.css';
 
@@ -28,7 +27,7 @@ class App extends React.Component {
 						this.setState({ fetchedUser: e.detail.data });
 						break;
 					case 'VKWebAppGeodataResult':
-						this.setState({ 
+						this.setState({
 							geodata: {
 								lat: e.detail.data.lat,
 								lng: e.detail.data.long
@@ -105,7 +104,6 @@ class App extends React.Component {
 		return (
 			<View activePanel={this.state.activePanel}>
 				<Home id="home" user={this.state.fetchedUser} geodata={this.state.geodata} go={this.go} payFunc={this.payFunc} setSelectedPlace={this.setSelectedPlace} />
-				<Friends id="friends" data={this.state.data} friends={this.state.friends} getToken={this.getToken} token={this.state.token} go={this.go} />
 			</View>
 		);
 	}

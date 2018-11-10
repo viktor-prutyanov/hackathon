@@ -1,39 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Panel, Group, ListItem, Avatar, PanelHeader, Button, Div } from '@vkontakte/vkui';
+import { Panel, Group, ListItem, PanelHeader, Button, Div } from '@vkontakte/vkui';
 import Map from '../Components/Map';
 import './Home.css';
 
 const Home = (props) => (
 	<Panel id={props.id}>
-		<PanelHeader>Maps of Museums Nearby</PanelHeader>
+		<PanelHeader>Artists Nearby</PanelHeader>
 
 		<Div className='map'>
-			<h2>Map of museums near your location</h2>
 			<Map geodata={props.geodata} setSelectedPlace={props.setSelectedPlace}/>
 		</Div>
 
 		<Group>
 			<ListItem>
 				<Button size='l' stretched onClick={props.payFunc} >Pay</Button>
-			</ListItem>
-		</Group>
-
-		{
-			props.user &&
-			<Group title="User Info">
-				<ListItem
-					before={<Avatar src={props.user.photo_100}/>}
-					description={props.user.city && props.user.city.title}
-				>
-					{`${props.user.first_name} ${props.user.last_name}`}
-				</ListItem>
-			</Group>
-		}
-
-		<Group>
-			<ListItem>
-				<Button size='l' stretched onClick={props.go} data-to='friends'>Friends list</Button>
 			</ListItem>
 		</Group>
 	</Panel>
