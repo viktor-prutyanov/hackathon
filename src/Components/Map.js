@@ -81,6 +81,7 @@ export class MapContainer extends React.Component {
 				google={this.props.google}
 				zoom={14}
 				onReady={this.onMapReady}
+				onClick={this.update}
 				style={mapStyles}
 				initialCenter={position}
 			>

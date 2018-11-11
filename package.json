@@ -11,7 +11,7 @@
 		"predeploy": "npm run build"
 	},
 	"keywords": [],
-	"author": "Gleb Vorontsov <vorontsov.gleb@gmail.com>",
+	"author": "Viktor Prutyanov <viktor.prutyanov@phystech.edu>",
 	"license": "MIT",
 	"devDependencies": {
 		"cross-env": "^5.2.0",
