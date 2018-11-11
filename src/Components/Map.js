@@ -39,8 +39,8 @@ export class MapContainer extends React.Component {
 
 	update = () => {
 		var xhr = new XMLHttpRequest();
-		//var url = "http://172.20.36.209/load";
-		var url = "https://615230d9.ngrok.io/load";
+		var url = "http://172.20.36.209/load";
+		//var url = "https://615230d9.ngrok.io/load";
 		xhr.open("GET", url, true);
 		xhr.onreadystatechange = this.f1;
 		xhr.onreadystatechange = () => {
